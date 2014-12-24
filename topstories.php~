@@ -1,0 +1,33 @@
+<?php
+
+// Inialize session
+session_start();
+
+// Check, if user is already login, then jump to secured page
+if (isset($_SESSION['username'])) {
+        header('Location: securedpage.php');
+}
+
+?>
+<html>
+
+<?php
+//<b> echo $_SESSION['username']; </b>
+$name = $_SESSION['username'];
+ 
+$con = mysql_connect("localhost","root","");
+if (!$con)
+  {
+  die('Could not connect: ' . mysql_error());
+  }
+
+mysql_select_db("news1", $con);
+
+mysql_query("UPDATE user_behaviour SET national= national+1
+WHERE username= '$name'");
+
+mysql_close($con);
+
+ header( 'Location: http://localhost/project/domains/national/national.php' ) ;
+?> 
+</html>

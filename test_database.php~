@@ -1,0 +1,14 @@
+<?php
+$con1 = mysql_connect("localhost","root","");
+if (!$con1)
+  {
+  die('Could not connect: ' . mysql_error());
+  }
+mysql_select_db("news2", $con1);
+$a=mysql_query("select count(cnt) from user_interest where username ='lovy' and title ='abc'");
+$row = mysql_fetch_array($a);
+echo $row['count(cnt)'];
+echo "<br />";
+mysql_close($con1);
+
+?>
